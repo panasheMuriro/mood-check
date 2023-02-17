@@ -58,7 +58,7 @@ export default function Home() {
       <div style={{ padding: 20, height: "90vh" }}>
         <h2 style={{ color: "#808080", }}>How are you feeling?</h2>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr 1fr", flexWrap: "wrap", justifyContent: "center", width:"100%" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridTemplateRows: "1fr 1fr 1fr", flexWrap: "wrap", justifyContent: "center", width:"100%", height: 200 }}>
           {emojis.map((x, index) =>
             <button key={index} onClick={() => setSelectedEmoji(x)} style={{ fontSize: 60, backgroundColor: "#FEFBE9", textAlign: "center", borderRadius: 10, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2 }}>{x}</button>
           )}

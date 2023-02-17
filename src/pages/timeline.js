@@ -39,7 +39,9 @@ export default function Timeline() {
             getDoc(docRef).then(docSnap => {
                 if (docSnap.exists()) {
                     // console.log("Document data:", new Date(docSnap.data().data[1].time));
-                    setData(structureData(docSnap.data().data));
+                    let x = structureData(docSnap.data().data);
+                    x.reverse()
+                    setData(x);
                 } else {
                     // doc.data() will be undefined in this case
                     // console.log("No such document!");

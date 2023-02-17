@@ -1,4 +1,4 @@
-# Mood Check
+# Mood Check 😃
 
 Track you mood throughout the day by simply picking the emoji represeting how you are feeling, and then giving a 1-line response on why.
 

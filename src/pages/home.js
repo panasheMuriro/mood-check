@@ -60,7 +60,7 @@ export default function Home() {
 
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           {emojis.map((x, index) =>
-            <button key={index} onClick={() => setSelectedEmoji(x)} style={{ fontSize: 96, display: 'inline-flex', justifyContent: "center", alignItems: "center", width: 110, height: 110, backgroundColor: "#FEFBE9", textAlign: "center", borderRadius: 10, marginRight: 10, marginBottom: 10, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, }}>{x}</button>
+            <button key={index} onClick={() => setSelectedEmoji(x)} style={{ fontSize: 80, display: 'inline-block', justifyContent: "center", alignItems: "center", backgroundColor: "#FEFBE9", textAlign: "center", borderRadius: 10, marginRight: 10, marginBottom: 10, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, }}>{x}</button>
           )}
         </div>
         <h2 style={{ color: "#808080", }}>Why {selectedEmoji}?</h2>

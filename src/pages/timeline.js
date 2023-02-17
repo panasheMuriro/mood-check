@@ -103,7 +103,7 @@ export default function Timeline() {
 
             <div style={{ height: "10vh", display: "flex", position: "sticky", top: 0 }}>
                 <div style={{ backgroundColor: "#F8CBA6", color: "#808080", fontSize: 24, width: "100%", alignItems: "center", display: "flex", justifyContent: "space-evenly" }}>
-                    <button onClick={() => navigate('/')} style={{ borderStyle: "solid", borderWidth: 2, height: 50, width: 50, backgroundColor: "#FEFBE9", borderRadius: 10, borderColor: "#F8CBA6", display: "flex", justifyContent: "center", alignItems: "center" }}><ArrowLeftLineIcon /></button>
+                    <button onClick={() => navigate('/home')} style={{ borderStyle: "solid", borderWidth: 2, height: 50, width: 50, backgroundColor: "#FEFBE9", borderRadius: 10, borderColor: "#F8CBA6", display: "flex", justifyContent: "center", alignItems: "center" }}><ArrowLeftLineIcon /></button>
                     <h1 style={{ margin: 0, color: "#fff", WebkitTextStrokeWidth: 0, WebkitTextStrokeColor: "#000000", WebkitTextFillColor: "#fff" }}>MoodCheck</h1>
                     <button style={{ visibility: "hidden", borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, height: 50, width: 50, backgroundColor: "#FEFBE9", borderRadius: 10 }}><ArrowLeftLineIcon /></button>
 

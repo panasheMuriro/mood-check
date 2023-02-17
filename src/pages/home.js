@@ -58,9 +58,9 @@ export default function Home() {
       <div style={{ padding: 20, height: "90vh" }}>
         <h2 style={{ color: "#808080", }}>How are you feeling?</h2>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridTemplateRows: "1fr 1fr", flexWrap: "wrap", justifyContent: "center" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridTemplateRows: "1fr 1fr", flexWrap: "wrap", justifyContent: "center", width:"100%" }}>
           {emojis.map((x, index) =>
-            <button key={index} onClick={() => setSelectedEmoji(x)} style={{ fontSize: 80, display: 'inline-block', justifyContent: "center", alignItems: "center", backgroundColor: "#FEFBE9", textAlign: "center", borderRadius: 10, marginRight: 10, marginBottom: 10, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, }}>{x}</button>
+            <button key={index} onClick={() => setSelectedEmoji(x)} style={{ fontSize: 72, backgroundColor: "#FEFBE9", textAlign: "center", borderRadius: 10, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2 }}>{x}</button>
           )}
         </div>
         <h2 style={{ color: "#808080", }}>Why {selectedEmoji}?</h2>

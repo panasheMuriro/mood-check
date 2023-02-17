@@ -44,8 +44,8 @@ export default function Home() {
   }
 
   return (
-    <div style={{ overflow: "hidden", height: "100vh" }}>
-      <div style={{ height: "10vh", display: "flex",marginBottom: -3 }}>
+    <div style={{height: "100vh" }}>
+      <div style={{position: "sticky", top: 0, height: "10vh", display: "flex",marginBottom: -3 }}>
         <div style={{ backgroundColor: "#F8CBA6", color: "#808080", fontSize: 24, width: "100%", alignItems: "center", display: "flex", justifyContent: "space-evenly" }}>
           <button style={{ visibility: "hidden", borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, height: 50, width: 50, backgroundColor: "#FEFBE9", borderRadius: 10 }}><ListUnorderedIcon /></button>
           <h1 style={{ margin: 0, color: "#fff", WebkitTextStrokeWidth: 0, WebkitTextStrokeColor: "#000000" }}>MoodCheck</h1>

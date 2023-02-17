@@ -4,6 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, connectAuthEmula
 import { useState } from "react";
 import { useEffect } from "react";
 import { getFirestore } from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

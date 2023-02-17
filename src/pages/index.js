@@ -1,128 +1,78 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { navigate } from 'gatsby';
+import React, { useEffect, useState } from 'react'
+import ListUnorderedIcon from 'remixicon-react/ListUnorderedIcon';
+import { db, useAuth } from '../utils/firebase';
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-  },
-]
+export default function Home() {
+  let user = useAuth();
 
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
+  const [selectedEmoji, setSelectedEmoji] = useState();
+  const [reason, setReason] = useState('');
 
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
 
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
+  let emojis = [
+    '😐',
+    '🙁',
+    '😃',
+    '🙂',
+    '😔'
+  ];
 
-const IndexPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
+
+
+
+  // TODO: handle posting to firebase
+
+  const addMood = () => {
+
+    const userRef = doc(db, "users", user.uid);
+    // Set the "capital" field of the city 'DC'
+    updateDoc(userRef, {
+      data: arrayUnion({
+        time: new Date().toISOString(),
+        emoji: selectedEmoji,
+        reason: reason
+      })
+    }).then(done=> {
+      console.log("It worked")
+    })
+    setSelectedEmoji();
+    setReason('');
+    navigate('/timeline')
+  }
+
+  return (
+    <div style={{ overflow: "hidden", height: "100vh" }}>
+      <div style={{ height: "10vh", display: "flex",marginBottom: -3 }}>
+        <div style={{ backgroundColor: "#F8CBA6", color: "#808080", fontSize: 24, width: "100%", alignItems: "center", display: "flex", justifyContent: "space-evenly" }}>
+          <button style={{ visibility: "hidden", borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, height: 50, width: 50, backgroundColor: "#FEFBE9", borderRadius: 10 }}><ListUnorderedIcon /></button>
+          <h1 style={{ margin: 0, color: "#fff", WebkitTextStrokeWidth: 0, WebkitTextStrokeColor: "#000000" }}>MoodCheck</h1>
+          <button onClick={() => navigate('/timeline')} style={{ borderStyle: "solid", borderWidth: 2, height: 50, width: 50, backgroundColor: "#FEFBE9", borderRadius: 10, borderColor: "#F8CBA6", display: "flex", justifyContent: "center", alignItems: "center" }}><ListUnorderedIcon /></button>
+        </div>
+      </div>
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#F8CBA6" fill-opacity="1" d="M0,256L34.3,245.3C68.6,235,137,213,206,208C274.3,203,343,213,411,213.3C480,213,549,203,617,170.7C685.7,139,754,85,823,101.3C891.4,117,960,203,1029,202.7C1097.1,203,1166,117,1234,96C1302.9,75,1371,117,1406,138.7L1440,160L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
+
+      <div style={{ padding: 20, height: "90vh" }}>
+        <h2 style={{ color: "#808080", }}>How are you feeling?</h2>
+
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+          {emojis.map((x, index) =>
+            <button key={index} onClick={() => setSelectedEmoji(x)} style={{ fontSize: 96, display: 'inline-flex', justifyContent: "center", alignItems: "center", width: 110, height: 110, backgroundColor: "#FEFBE9", textAlign: "center", borderRadius: 10, marginRight: 10, marginBottom: 10, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, }}>{x}</button>
+          )}
+        </div>
+        <h2 style={{ color: "#808080", }}>Why {selectedEmoji}?</h2>
+        <textarea value={reason} onChange={(e) => setReason(e.target.value)} style={{ resize: "none", width: "100%", height: 120, borderColor: "#F8CBA6", borderStyle: "solid", borderWidth: 2, fontFamily: "Arial", fontSize: 16, color: "#404040", padding: 10 }}>
+        </textarea>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+
+          <button onClick={addMood} style={{ marginLeft: "auto", marginRight: "auto", backgroundColor: "#000000", color: "#ffffff", padding: "15px 30px", borderRadius: 30, fontWeight: "bold", border: "none" }}>Save</button>
+
+        </div>
+      </div>
     </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
-)
+  )
+}
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = () => <Seo title="Home" />
-
-export default IndexPage
